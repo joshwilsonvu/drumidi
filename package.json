@@ -1,0 +1,25 @@
+{
+  "name": "drumidi",
+  "version": "0.0.1",
+  "description": "Tap a kick and snare groove and let AI do the rest.",
+  "main": "index.js",
+  "repository": "https://github.com/joshwilsonvu/drumidi",
+  "author": "Josh Wilson <joshwilsonvu@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "parse-midi": "node --trace-warnings scripts/parse-midi.js assets/info.csv dist/parsed.json"
+  },
+  "dependencies": {
+    "@magenta/music": "^1.23.0",
+    "@tensorflow/tfjs-core": "2.8.6"
+  },
+  "devDependencies": {
+    "csv-parse": "^4.16.3",
+    "fs-extra": "^10.0.0",
+    "globby": "^12.0.2",
+    "seedrandom": "~2.4.3",
+    "stringify-object": "^4.0.0"
+  }
+}
