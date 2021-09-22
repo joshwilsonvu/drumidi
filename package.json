@@ -1,7 +1,7 @@
 {
   "name": "drumidi",
   "version": "0.0.1",
-  "description": "Tap a kick and snare groove and let AI do the rest.",
+  "description": "Your robot jam partner. Tap a kick and snare groove and let AI do the rest.",
   "main": "index.js",
   "repository": "https://github.com/joshwilsonvu/drumidi",
   "author": "Josh Wilson <joshwilsonvu@gmail.com>",
@@ -9,7 +9,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "parse-midi": "node --trace-warnings scripts/parse-midi.js assets/info.csv dist/parsed.json"
+    "parse-midi": "node scripts/parse-midi.js assets/info.csv note_sequences"
   },
   "dependencies": {
     "@magenta/music": "^1.23.0",

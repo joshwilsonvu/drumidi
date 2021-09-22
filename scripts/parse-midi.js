@@ -8,7 +8,7 @@ import stringifyObject from "stringify-object";
 
 const { midiToSequenceProto } = core;
 
-const [csvFile, outFile] = process.argv.slice(2);
+const [csvFile, outDir] = process.argv.slice(2);
 
 let parser;
 const promise = new Promise((res, rej) => {
@@ -20,24 +20,17 @@ const promise = new Promise((res, rej) => {
 
 fs.createReadStream(csvFile).pipe(parser);
 
-promise
-  .then((rows) => {
-    return Promise.all(
-      rows.map(async (row) => ({
-        ...row,
-        noteSequence: midiToSequenceProto(
-          (await fs.readFile(path.join("assets", row.midi_filename))).buffer
-        ),
-      }))
-    );
-  })
-  .then((rows) =>
+promise.then((rows) => {
+  rows.forEach(async (row, i) => {
+    const object = {
+      ...row,
+      noteSequence: midiToSequenceProto(
+        (await fs.readFile(path.join("assets", row.midi_filename))).buffer
+      ),
+    };
     fs.outputFile(
-      outFile,
-      JSON.stringify(rows, null, 2),
-      //       ```
-      // export default ${stringifyObject(rows, { indent: "  ", singleQuotes: false })};
-      // ```,
-      "utf-8"
-    )
-  );
+      path.join(outDir, `${i}.json`),
+      JSON.stringify(object, null, 2)
+    );
+  });
+});
